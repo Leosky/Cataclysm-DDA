@@ -1585,7 +1585,22 @@ std::string monster::get_effect_status() const
     for( auto &elem : *effects ) {
         for( auto &_it : elem.second ) {
             if( elem.first->is_show_in_info() ) {
-                effect_status.push_back( _it.second.disp_name() );
+                if( !elem.first->is_consolidated_in_info() ) {
+                    effect_status.push_back( _it.second.disp_name() );
+                } else {
+                    bool duplicate = false;
+                    for( std::string _it2 : effect_status ) {
+                        if( _it2.compare( _it.second.disp_name() ) ) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
+                    if( duplicate ) {
+                        continue;
+                    } else {
+                        effect_status.push_back( _it.second.disp_name() );
+                    }
+                }
             }
         }
     }

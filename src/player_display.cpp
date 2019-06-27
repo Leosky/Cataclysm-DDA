@@ -1095,11 +1095,42 @@ void player::disp_info()
         for( auto &_effect_it : elem.second ) {
             const std::string tmp = _effect_it.second.disp_name();
             if( !tmp.empty() ) {
-                effect_name.push_back( tmp );
-                effect_text.push_back( _effect_it.second.disp_desc() );
+                if( !_effect_it.second.get_effect_type()->is_consolidated_in_info() ) {
+                    effect_name.push_back( tmp );
+                    effect_text.push_back( _effect_it.second.disp_desc() );
+                } else {
+                    bool duplicate = false;
+                    for( std::string _name_it : effect_name ) {
+                        if( _name_it.compare( tmp ) ) {
+                            duplicate = true;
+                            break;
+                        }
+                    }
+                    if( duplicate ) {
+                        continue;
+                    } else {
+                        effect_name.push_back( tmp );
+                        effect_text.push_back( _effect_it.second.disp_desc() );
+                    }
+                }
             }
         }
     }
+
+    /**
+        if( !elem.first->is_consolidated_in_info() ) {
+            effect_status.push_back( _it.second.disp_name() );
+        } else {
+            bool duplicate = false;
+            for( std::string _it2 : effect_status ) {
+                if( _it2.compare( _it.second.disp_name() ) ) {
+                    duplicate = true;
+                    break;
+                }
+            }
+            if( duplicate ) continue;
+        }
+    */
     if( get_perceived_pain() > 0 ) {
         effect_name.push_back( _( "Pain" ) );
         const auto ppen = get_pain_penalty();

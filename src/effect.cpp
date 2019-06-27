@@ -423,6 +423,10 @@ bool effect_type::is_show_in_info() const
 {
     return show_in_info;
 }
+bool effect_type::is_consolidated_in_info() const
+{
+    return consolidated_in_info;
+}
 bool effect_type::load_miss_msgs( JsonObject &jo, const std::string &member )
 {
     if( jo.has_array( member ) ) {
@@ -1266,6 +1270,7 @@ void load_effect_type( JsonObject &jo )
 
     new_etype.main_parts_only = jo.get_bool( "main_parts_only", false );
     new_etype.show_in_info = jo.get_bool( "show_in_info", false );
+    new_etype.consolidated_in_info = jo.get_bool( "consolidated_in_info", false );
     new_etype.pkill_addict_reduces = jo.get_bool( "pkill_addict_reduces", false );
 
     new_etype.pain_sizing = jo.get_bool( "pain_sizing", false );

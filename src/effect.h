@@ -71,7 +71,10 @@ class effect_type
         /** Returns true if an effect will only target main body parts (i.e., those with HP). */
         bool get_main_parts() const;
 
+        /** Return tru if an effect should be shown in the info window. */
         bool is_show_in_info() const;
+        /** Return true if multiple instance of an effect is only show once in info  window. */
+        bool is_consolidated_in_info() const;
 
         /** Loading helper functions */
         bool load_mod_data( JsonObject &jo, const std::string &member );
@@ -97,6 +100,8 @@ class effect_type
 
         // Determines if effect should be shown in description.
         bool show_in_info;
+        // True if multiple effect of this type should only be displayed once.
+        bool consolidated_in_info;
 
         std::vector<trait_id> resist_traits;
         std::vector<efftype_id> resist_effects;
