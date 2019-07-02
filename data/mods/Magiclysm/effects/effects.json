@@ -40,6 +40,7 @@
     "remove_message": "Your energy field fades.",
     "rating": "good",
     "show_in_info": true,
+    "consolidated_in_info": true,
     "base_mods": { "environmental_protection": [ 5 ], "material_thickness": [ 3 ], "warmth": [ 50 ] }
   },
   {

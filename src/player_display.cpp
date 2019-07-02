@@ -1103,7 +1103,6 @@ void player::disp_info()
                     for( std::string _name_it : effect_name ) {
                         if( _name_it.compare( tmp ) ) {
                             duplicate = true;
-                            break;
                         }
                     }
                     if( duplicate ) {
